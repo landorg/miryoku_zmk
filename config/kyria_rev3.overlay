@@ -1,0 +1,14 @@
+/*
+ * nice!nano v2 battery fix: use AIN2 voltage divider instead of VDDHDIV5.
+ * VDDHDIV5 reads ~2.4V on this hardware instead of the actual battery voltage,
+ * while the AIN2/P0.04 voltage divider circuit correctly reflects battery level.
+ */
+
+/ {
+    vbatt: vbatt {
+        compatible = "zmk,battery-voltage-divider";
+        io-channels = <&adc 2>;
+        output-ohms = <2000000>;
+        full-ohms = <(2000000 + 806000)>;
+    };
+};
